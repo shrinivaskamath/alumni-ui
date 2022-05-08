@@ -1,0 +1,10 @@
+.custom-navbar{
+    background-color: #fdf2e9;
+}
+
+.custom-navbar-font{
+    color: #333;
+    font-weight: 400;
+    font-family: 'Rubik';
+    font-size: 130%;
+}
