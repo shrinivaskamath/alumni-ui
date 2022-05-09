@@ -1,5 +1,24 @@
+h3 {
+  color: #333;
+}
+
+label {
+  color: #333;
+  font-weight: bold;
+}
+
+#firstName,
+#occupation,
+#email,
+#address {
+  margin-right: 1%;
+}
+
 .form-style {
-  margin-top: 3%;
-  border: orange solid 1px;
-  padding: 3% 3% 3% 3%;
+  padding: 0% 3% 0% 3%;
+}
+
+.submit-btn {
+  width: 20%;
+  margin-left: 40%;
 }
