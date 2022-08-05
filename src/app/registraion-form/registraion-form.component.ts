@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { response } from 'express';
 import { RegistrationFormService } from '../services/registration-form.service';
 
 @Component({
@@ -9,6 +10,12 @@ import { RegistrationFormService } from '../services/registration-form.service';
 })
 export class RegistraionFormComponent implements OnInit {
   public years: Array<Number> = [];
+  submitted: boolean = false;
+  isSuccess: boolean = false;
+  isError: boolean = false;
+  isLoading: boolean = false;
+  errorMessageClass: string = '';
+  errorMessageYear: string = '';
   regisrationForm = new FormGroup({
     firstName: new FormControl('', [Validators.required]),
     lastName: new FormControl('', [Validators.required]),
@@ -17,13 +24,15 @@ export class RegistraionFormComponent implements OnInit {
     email: new FormControl('', [Validators.required]),
     phone: new FormControl('', [
       Validators.required,
-      Validators.pattern('[0-9]{3}-[0-9]{2}-[0-9]{3}'),
+      Validators.pattern('^[0-9]+$'),
+      Validators.maxLength(10),
+      Validators.minLength(10),
     ]),
-    canContact: new FormControl('', [Validators.required]),
-    fromYear: new FormControl('Select a year', [Validators.required]),
-    fromClass: new FormControl('Select a class', [Validators.required]),
-    toYear: new FormControl('Select a year', [Validators.required]),
-    toClass: new FormControl('Select a class', [Validators.required]),
+    // canContact: new FormControl('', [Validators.required]),
+    fromYear: new FormControl('', [Validators.required]),
+    fromClass: new FormControl('', [Validators.required]),
+    toYear: new FormControl('', [Validators.required]),
+    toClass: new FormControl('', [Validators.required]),
     address1: new FormControl('', [Validators.required]),
     address2: new FormControl('', [Validators.required]),
     city: new FormControl('', [Validators.required]),
@@ -39,7 +48,32 @@ export class RegistraionFormComponent implements OnInit {
     }
   }
 
+  onChange() {
+    if (
+      this.regisrationForm.get('toYear')?.value <
+      this.regisrationForm.get('fromYear')?.value
+    ) {
+      this.errorMessageYear =
+        'Parting year cannot be earlier than joining year';
+    } else {
+      this.errorMessageYear = '';
+    }
+
+    if (
+      this.regisrationForm.get('toClass')?.value !== '' &&
+      this.regisrationForm.get('toClass')?.value <
+        this.regisrationForm.get('fromClass')?.value
+    ) {
+      this.errorMessageClass =
+        'Parting class cannot be earlier than joining class';
+    } else {
+      this.errorMessageClass = '';
+    }
+  }
+
   onSubmit() {
+    this.isLoading = true;
+    this.submitted = true;
     if (this.regisrationForm.valid) {
       let formData = {
         name:
@@ -49,7 +83,7 @@ export class RegistraionFormComponent implements OnInit {
         qualification: this.regisrationForm.get('qualification')?.value,
         email: this.regisrationForm.get('email')?.value,
         mobile: this.regisrationForm.get('phone')?.value,
-        canContact: this.regisrationForm.get('canContact')?.value,
+        canContact: true, //this.regisrationForm.get('canContact')?.value,
         fromYear: this.regisrationForm.get('fromYear')?.value,
         toYear: this.regisrationForm.get('toYear')?.value,
         fromClass: this.regisrationForm.get('fromClass')?.value,
@@ -62,7 +96,20 @@ export class RegistraionFormComponent implements OnInit {
         postalCode: this.regisrationForm.get('pin')?.value,
       };
 
-      this.registrationFormService.postFormData(formData).subscribe();
+      console.log(this.regisrationForm.get('fromYear')?.value);
+
+      this.registrationFormService.postFormData(formData).subscribe(
+        (response) => {
+          this.isSuccess = true;
+        },
+        (error) => {
+          this.isError = true;
+        },
+        () => {
+          this.isLoading = false;
+          this.submitted = false;
+        }
+      );
       this.regisrationForm.reset();
     }
   }

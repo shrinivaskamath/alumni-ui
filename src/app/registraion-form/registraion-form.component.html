@@ -1,10 +1,6 @@
-<!-- <div class="row">
-  <div class="col-md-3"></div>
-  <div class="col-md-6 form-style"> -->
-<!-- <h1>Alumni Registration</h1> -->
-<div class="container form-style">
+<div *ngIf="!isSuccess && !isError && !isLoading" class="container form-style">
   <form action="" [formGroup]="regisrationForm">
-    <h3 class="text-center">Alumni Registration</h3>
+    <h3 class="text-center">ಹಳೆವಿದ್ಯಾರ್ಥಿಗಳ ನೋಂದಣಿ</h3>
     <div class="input-group mb-3">
       <input
         type="text"
@@ -12,7 +8,13 @@
         id="firstName"
         formControlName="firstName"
         placeholder="First Name"
-        aria-label="First Name"
+        aria-label="First
+      Name"
+        [ngClass]="{
+          error:
+            (submitted && regisrationForm.controls['firstName'].invalid) ||
+            (regisrationForm.controls['firstName'].touched && regisrationForm.controls['firstName']?.errors?.['required'])
+        }"
       />
       <input
         type="text"
@@ -21,8 +23,14 @@
         formControlName="lastName"
         placeholder="Last Name"
         aria-label="Last Name"
+        [ngClass]="{
+          error:
+            (submitted && regisrationForm.controls['lastName'].invalid) ||
+            (regisrationForm.controls['lastName'].touched && regisrationForm.controls['lastName']?.errors?.['required'])
+        }"
       />
     </div>
+
     <div class="input-group mb-3">
       <input
         type="text"
@@ -31,6 +39,11 @@
         placeholder="Occupation"
         aria-label="Occupation"
         formControlName="occupation"
+        [ngClass]="{
+          error:
+            (submitted && regisrationForm.controls['occupation'].invalid) ||
+            (regisrationForm.controls['occupation'].touched && regisrationForm.controls['occupation']?.errors?.['required'])
+        }"
       />
       <input
         type="text"
@@ -38,6 +51,11 @@
         placeholder="Qualification"
         aria-label="Qualification"
         formControlName="qualification"
+        [ngClass]="{
+          error:
+            (submitted && regisrationForm.controls['qualification'].invalid) ||
+            (regisrationForm.controls['qualification'].touched && regisrationForm.controls['qualification']?.errors?.['required'])
+        }"
       />
     </div>
     <div class="input-group mb-3">
@@ -48,6 +66,11 @@
         placeholder="Email"
         aria-label="Email"
         formControlName="email"
+        [ngClass]="{
+          error:
+            (submitted && regisrationForm.controls['email'].invalid) ||
+            (regisrationForm.controls['email'].touched && regisrationForm.controls['email']?.errors?.['required'])
+        }"
       />
       <input
         type="tel"
@@ -55,6 +78,15 @@
         formControlName="phone"
         placeholder="Telephone / Mobile Number"
         aria-label="Telephone / Mobile Number"
+        [ngClass]="{
+          error:
+            (submitted && regisrationForm.controls['phone'].invalid) ||
+            (regisrationForm.controls['phone'].touched && 
+            (regisrationForm.controls['phone']?.errors?.['required'] || 
+            regisrationForm.controls['phone']?.errors?.['pattern'] ||
+            regisrationForm.controls['phone']?.errors?.['minLength'] ||
+            regisrationForm.controls['phone']?.errors?.['maxLength'] ))
+        }"
       />
     </div>
     <div class="input-group mb-3">
@@ -65,6 +97,11 @@
         formControlName="address1"
         placeholder="Address Line 1"
         aria-label="Address Line 1"
+        [ngClass]="{
+          error:
+            (submitted && regisrationForm.controls['address1'].invalid) ||
+            (regisrationForm.controls['address1'].touched && regisrationForm.controls['address1']?.errors?.['required'])
+        }"
       />
       <input
         type="text"
@@ -72,6 +109,11 @@
         formControlName="address2"
         placeholder="Address Line 2"
         aria-label="Address Line 2"
+        [ngClass]="{
+          error:
+            (submitted && regisrationForm.controls['address2'].invalid) ||
+            (regisrationForm.controls['address2'].touched && regisrationForm.controls['address2']?.errors?.['required'])
+        }"
       />
     </div>
     <div class="input-group justify-content-between mb-3">
@@ -82,6 +124,11 @@
           id="city"
           formControlName="city"
           placeholder="City"
+          [ngClass]="{
+            error:
+              (submitted && regisrationForm.controls['city'].invalid) ||
+              (regisrationForm.controls['city'].touched && regisrationForm.controls['city']?.errors?.['required'])
+          }"
         />
         <!-- <label for="city">City</label> -->
       </div>
@@ -92,6 +139,11 @@
           id="state"
           formControlName="state"
           placeholder="State"
+          [ngClass]="{
+            error:
+              (submitted && regisrationForm.controls['state'].invalid) ||
+              (regisrationForm.controls['state'].touched && regisrationForm.controls['state']?.errors?.['required'])
+          }"
         />
         <!-- <label for="state">State</label> -->
       </div>
@@ -102,6 +154,11 @@
           id="country"
           formControlName="country"
           placeholder="Country"
+          [ngClass]="{
+            error:
+              (submitted && regisrationForm.controls['country'].invalid) ||
+              (regisrationForm.controls['country'].touched && regisrationForm.controls['country']?.errors?.['required'])
+          }"
         />
         <!-- <label for="country">Country</label> -->
       </div>
@@ -112,52 +169,53 @@
           id="pin"
           formControlName="pin"
           placeholder="Pin Code"
+          [ngClass]="{
+            error:
+              (submitted && regisrationForm.controls['pin'].invalid) ||
+              (regisrationForm.controls['pin'].touched && regisrationForm.controls['pin']?.errors?.['required'])
+          }"
         />
         <!-- <label for="pin">Pin Code</label> -->
       </div>
     </div>
-    <div class="input-group mb-3">
-      <div class="input-group-text">
-        <input
-          class="form-check-input mt-0"
-          type="checkbox"
-          value=""
-          aria-label="Checkbox for following text input"
-          formControlName="canContact"
-        />
-      </div>
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Can Contact?"
-        aria-label="Can Contact?"
-        disabled
-      />
-    </div>
     <div class="input-group justify-content-between mb-3">
       <div>
-        <label for="fromYear">Joining Year</label>
+        <label for="fromYear" class="form-lable"
+          >Joining Year<sup>*</sup></label
+        >
         <select
           class="form-select"
           id="fromYear"
           formControlName="fromYear"
           aria-label="From Year"
+          [ngClass]="{
+            error:
+              (submitted && regisrationForm.controls['fromYear'].invalid) ||
+              (regisrationForm.controls['fromYear'].touched && regisrationForm.controls['fromYear']?.errors?.['required'])
+          }"
         >
-          <option selected>Select a year</option>
+          <option value="" disabled>Select a year</option>
           <option value="{{ year }}" *ngFor="let year of years">
             {{ year }}
           </option>
         </select>
       </div>
       <div>
-        <label for="fromClass">Joining Class</label>
+        <label for="fromClass" class="form-lable"
+          >Joining Class<sup>*</sup></label
+        >
         <select
           class="form-select"
           id="fromClass"
           formControlName="fromClass"
           aria-label="From Class"
+          [ngClass]="{
+            error:
+              (submitted && regisrationForm.controls['fromClass'].invalid) ||
+              (regisrationForm.controls['fromClass'].touched && regisrationForm.controls['fromClass']?.errors?.['required'])
+          }"
         >
-          <option selected>Select a class</option>
+          <option value="" disabled>Select a class</option>
           <option value="1">One</option>
           <option value="2">Two</option>
           <option value="3">Three</option>
@@ -171,29 +229,45 @@
         </select>
       </div>
       <div>
-        <label for="toYear">Parting Year</label>
+        <label for="toYear" class="form-lable">Parting Year<sup>*</sup></label>
         <select
           class="form-select"
           id="toYear"
           formControlName="toYear"
+          (change)="onChange()"
           aria-label="Floating label select example"
+          [ngClass]="{
+            error:
+              (submitted && regisrationForm.controls['toYear'].invalid) ||
+              (regisrationForm.controls['toYear'].touched && regisrationForm.controls['toYear']?.errors?.['required']) ||
+              errorMessageYear
+          }"
         >
-          <option selected>Select a year</option>
+          <option value="" disabled>Select a year</option>
           <option value="{{ year }}" *ngFor="let year of years">
             {{ year }}
           </option>
         </select>
       </div>
       <div>
-        <label for="fromClass">Parting Class</label>
+        <label for="fromClass" class="form-lable"
+          >Parting Class<sup>*</sup></label
+        >
 
         <select
           class="form-select"
           id="toClass"
           formControlName="toClass"
+          (change)="onChange()"
           aria-label="Floating label select example"
+          [ngClass]="{
+            error:
+              (submitted && regisrationForm.controls['toClass'].invalid) ||
+              (regisrationForm.controls['toClass'].touched && regisrationForm.controls['toClass']?.errors?.['required'])||
+              errorMessageClass
+          }"
         >
-          <option selected>Select a class</option>
+          <option value="" disabled>Select a class</option>
           <option value="1">One</option>
           <option value="2">Two</option>
           <option value="3">Three</option>
@@ -206,13 +280,22 @@
           <option value="10">Ten</option>
         </select>
       </div>
+    </div>
+    <div class="errorMessage" *ngIf="errorMessageClass">
+      {{ errorMessageClass }}
+    </div>
+    <div class="errorMessage" *ngIf="errorMessageYear">
+      {{ errorMessageYear }}
     </div>
     <div>
       <div>
         <button
           type="button"
           (click)="onSubmit()"
-          class="btn btn-primary submit-btn"
+          class="btn submit-btn mb-1"
+          [disabled]="
+            regisrationForm.invalid || errorMessageClass || errorMessageYear
+          "
         >
           Submit
         </button>
@@ -220,6 +303,34 @@
     </div>
   </form>
 </div>
-<!-- </div>
-  <div class="col-md-3"></div>
-</div> -->
+<div
+  class="spinner-border text-primary spinner"
+  role="status"
+  *ngIf="isLoading"
+>
+  <span class="visually-hidden">Loading...</span>
+</div>
+<div class="row success-panel" *ngIf="isSuccess">
+  <div class="col-xl-3"></div>
+  <div class="col-xl-6">
+    <div class="card">
+      <div class="card-header text-white bg-success">ಧನ್ಯವಾದಗಳು</div>
+      <div class="card-body">
+        <h5 class="card-title">ಫಾರ್ಮ್ ಅನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಸಲ್ಲಿಸಲಾಗಿದೆ</h5>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3"></div>
+</div>
+<div class="row success-panel" *ngIf="isError">
+  <div class="col-xl-3"></div>
+  <div class="col-xl-6">
+    <div class="card-header text-white bg-danger">ಕ್ಷಮಿಸಿ</div>
+    <div class="card-body">
+      <h5 class="card-title">
+        ಫಾರ್ಮ್ ಅನ್ನು ಸಲ್ಲಿಸುವಲ್ಲಿ ದೋಷ ಕಂಡುಬಂದಿದೆ, ದಯವಿಟ್ಟು ಸ್ವಲ್ಪ ಸಮಯದ ನಂತರ
+        ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.
+      </h5>
+    </div>
+  </div>
+</div>

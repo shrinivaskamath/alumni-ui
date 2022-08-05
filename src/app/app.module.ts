@@ -6,9 +6,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RegistraionFormComponent } from './registraion-form/registraion-form.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { GalleryPageComponent } from './gallery-page/gallery-page.component';
+import { HistoryPageComponent } from './history-page/history-page.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, RegistraionFormComponent],
+  declarations: [
+    AppComponent,
+    NavbarComponent,
+    RegistraionFormComponent,
+    HomePageComponent,
+    GalleryPageComponent,
+    HistoryPageComponent,
+    ContactUsComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

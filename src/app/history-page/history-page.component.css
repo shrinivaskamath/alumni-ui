@@ -1,0 +1,19 @@
+.text-holder {
+  background-image: "../../assets/b1.png";
+}
+
+.history-lines {
+  text-align: left;
+  font-size: small;
+  text-indent: 5%;
+  color: whitesmoke;
+}
+
+.image-desc {
+  font-weight: bold;
+  color: whitesmoke;
+}
+.container {
+  background: rgba(0, 0, 0, 0.6);
+  padding-top: 20px;
+}
