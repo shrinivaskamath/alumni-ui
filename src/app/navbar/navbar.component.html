@@ -9,17 +9,25 @@
       data-bs-toggle="collapse"
       data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent"
-      aria-expanded="false"
+      aria-expanded="!isNavbarCollapsed"
       aria-label="Toggle navigation"
+      (click)="isNavbarCollapsed = !isNavbarCollapsed"
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div
+      class="collapse navbar-collapse"
+      [ngClass]="{ show: !isNavbarCollapsed }"
+      id="navbarSupportedContent"
+    >
       <ul
         class="navbar-nav me-auto mb-2 mb-lg-0 container-fluid justify-content-end"
       >
         <li class="nav-item">
-          <a class="nav-link active custom-navbar-font" routerLink="/home"
+          <a
+            class="nav-link active custom-navbar-font"
+            routerLink="/home"
+            (click)="collapseNavbar()"
             >ಸ್ವಾಗತ</a
           >
         </li>
@@ -28,6 +36,7 @@
             class="nav-link active custom-navbar-font"
             routerLink="/history"
             routerLinkActive="activebutton"
+            (click)="collapseNavbar()"
             >ಇತಿಹಾಸ</a
           >
         </li>
@@ -36,6 +45,7 @@
             class="nav-link active custom-navbar-font"
             routerLink="/registration"
             routerLinkActive="activebutton"
+            (click)="collapseNavbar()"
             >ನೋಂದಣಿ</a
           >
         </li>
@@ -44,6 +54,7 @@
             href="#"
             class="nav-link active custom-navbar-font"
             routerLink="/gallery"
+            (click)="collapseNavbar()"
             >ಗ್ಯಾಲರಿ</a
           >
         </li>
@@ -52,6 +63,7 @@
             routerLink="/contact"
             routerLinkActive="activebutton"
             class="nav-link active custom-navbar-font"
+            (click)="collapseNavbar()"
             >ಸಂಪರ್ಕ</a
           >
         </li>
@@ -60,6 +72,8 @@
           <a
             href="https://drive.google.com/drive/folders/1aS6mD3LKHVTE5feB9jPLOy-47B5YPlEh"
             class="nav-link active custom-navbar-font"
+            target="_blank"
+            (click)="collapseNavbar()"
             >ಶತಮಾನೋತ್ಸವ</a
           >
         </li>
