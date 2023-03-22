@@ -1,4 +1,4 @@
 registration validation (All are mandatory)
 Spinner
 
-march 11
+march 22
