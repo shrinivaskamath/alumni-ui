@@ -5,8 +5,10 @@ import { GalleryPageComponent } from './gallery-page/gallery-page.component';
 import { HistoryPageComponent } from './history-page/history-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { RegistraionFormComponent } from './registraion-form/registraion-form.component';
+import { CentenaryPageComponent } from './centenary-page/centenary-page.component';
 
 const routes: Routes = [
+  { path: 'centenary', component: CentenaryPageComponent },
   { path: 'home', component: HomePageComponent },
   { path: 'gallery', component: GalleryPageComponent },
   { path: 'history', component: HistoryPageComponent },
@@ -15,8 +17,8 @@ const routes: Routes = [
     path: 'registration',
     component: RegistraionFormComponent,
   },
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: '**', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'centenary', pathMatch: 'full' },
+  { path: '**', redirectTo: 'centenary', pathMatch: 'full' },
 ];
 
 @NgModule({
