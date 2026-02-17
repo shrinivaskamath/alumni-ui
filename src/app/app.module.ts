@@ -10,6 +10,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { GalleryPageComponent } from './gallery-page/gallery-page.component';
 import { HistoryPageComponent } from './history-page/history-page.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
+import { CentenaryPageComponent } from './centenary-page/centenary-page.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
     GalleryPageComponent,
     HistoryPageComponent,
     ContactUsComponent,
+    CentenaryPageComponent,
   ],
   imports: [
     BrowserModule,
