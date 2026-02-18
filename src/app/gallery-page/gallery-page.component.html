@@ -1,60 +1,65 @@
 <div class="gallery-page">
-  <div class="section-header fade-in-up">
-    <h2 class="section-title">ಗ್ಯಾಲರಿ</h2>
-    <p class="section-subtitle">ನಮ್ಮ ಶಾಲೆಯ ಸ್ಮರಣೀಯ ಕ್ಷಣಗಳು</p>
+  <div class="container-fluid">
+    <div class="section-header fade-in-up">
+      <h2 class="section-title">ಗ್ಯಾಲರಿ</h2>
+      <p class="section-subtitle">ನಮ್ಮ ಶಾಲೆಯ ಸ್ಮರಣೀಯ ಕ್ಷಣಗಳು</p>
+    </div>
+
+    <div class="gallery-grid">
+      <div
+        *ngFor="let image of galleryImages; let i = index"
+        class="gallery-item fade-in-up"
+        [style.animation-delay]="(i * 0.05) + 's'"
+        (click)="openModal(i)"
+      >
+        <div class="gallery-image-wrapper">
+          <img
+            [src]="image"
+            class="gallery-image"
+            [alt]="'Gallery Image ' + (i + 1)"
+            loading="lazy"
+          />
+          <div class="gallery-overlay">
+            <div class="gallery-icon">
+              <i class="fa fa-search-plus"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="container-fluid">
-    <div class="row g-4">
-      <div class="col-lg-4 col-md-6 col-sm-12">
-        <div class="gallery-item fade-in-up" style="animation-delay: 0.1s">
-          <div class="gallery-image-wrapper">
-            <img
-              src="assets/g1.jpeg"
-              class="gallery-image"
-              alt="Gallery Image 1"
-            />
-            <div class="gallery-overlay">
-              <div class="gallery-icon">
-                <i class="fa fa-search-plus"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-4 col-md-6 col-sm-12">
-        <div class="gallery-item fade-in-up" style="animation-delay: 0.2s">
-          <div class="gallery-image-wrapper">
-            <img
-              src="assets/g2.jpeg"
-              class="gallery-image"
-              alt="Gallery Image 2"
-            />
-            <div class="gallery-overlay">
-              <div class="gallery-icon">
-                <i class="fa fa-search-plus"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-4 col-md-6 col-sm-12">
-        <div class="gallery-item fade-in-up" style="animation-delay: 0.3s">
-          <div class="gallery-image-wrapper">
-            <img
-              src="assets/g3.jpeg"
-              class="gallery-image"
-              alt="Gallery Image 3"
-            />
-            <div class="gallery-overlay">
-              <div class="gallery-icon">
-                <i class="fa fa-search-plus"></i>
-              </div>
-            </div>
-          </div>
-        </div>
+  <!-- Modal Lightbox -->
+  <div class="modal-overlay" *ngIf="isModalOpen" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <button class="modal-close" (click)="closeModal()" aria-label="Close">
+        <i class="fa fa-times"></i>
+      </button>
+      <button
+        class="modal-nav modal-nav-prev"
+        (click)="previousImage()"
+        aria-label="Previous Image"
+        *ngIf="galleryImages.length > 1"
+      >
+        <i class="fa fa-chevron-left"></i>
+      </button>
+      <button
+        class="modal-nav modal-nav-next"
+        (click)="nextImage()"
+        aria-label="Next Image"
+        *ngIf="galleryImages.length > 1"
+      >
+        <i class="fa fa-chevron-right"></i>
+      </button>
+      <img
+        [src]="galleryImages[selectedImageIndex]"
+        class="modal-image"
+        [alt]="'Gallery Image ' + (selectedImageIndex + 1)"
+      />
+      <div class="modal-info" *ngIf="galleryImages.length > 1">
+        <span class="image-counter"
+          >{{ selectedImageIndex + 1 }} / {{ galleryImages.length }}</span
+        >
       </div>
     </div>
   </div>
